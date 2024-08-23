@@ -18,40 +18,25 @@ export default function Home() {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      images: [], // Initialize with an empty array
-    },
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "image" as never,
-  });
+    reset,
+  } = useForm<FormData>();
 
   const handleUpload = async (data: FormData) => {
     const formData = new FormData();
 
-    console.log(data.images);
-
     // Append each selected file to FormData
-    // data.image.forEach((file, index) => {
-    //   formData.append(`image${index}`, file);
+    data.images.forEach((file, index) => {
+      formData.append(`images`, file);
+    });
 
-    // });
-
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append("images", data.images[i]);
-    }
+    toast.success("Waiting uploading");
 
     try {
-      console.log(formData.get("images"));
-
       const res = await axios.post(
         "http://127.0.0.1:3008/api/upload",
         formData,
+
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -72,33 +57,20 @@ export default function Home() {
         className="w-[50svh] mx-auto mt-20"
         onSubmit={handleSubmit(handleUpload)}
       >
-        <div>
-          <h2 className="text-lg font-semibold">Images</h2>
-          {fields.map((field, index) => (
-            <div key={field.id} className="flex gap-4 items-center">
-              <Input
-                type="file"
-                {...register(`images`, {
-                  required: true,
-                })}
-              />
-              <Button
-                className="bg-blue-600/85 hover:bg-blue-700 mt-6"
-                type="button"
-                onClick={() => remove(index)}
-              >
-                Remove
-              </Button>
-            </div>
-          ))}
-          <Button
-            className="bg-blue-600/85 hover:bg-blue-700 mt-3"
-            type="button"
-            onClick={() => append({ image: null })}
-          >
-            Add Images
-          </Button>
+        <h2 className="text-lg font-semibold">Images</h2>
+
+        <div className="flex gap-4 items-center">
+          <Input
+            type="file"
+            multiple={true}
+            {...register("images", {
+              required: true,
+              // validate: (files) =>
+              //   files.length >= 5 || "Please select at least 5 images.",
+            })}
+          />
         </div>
+
         <Button type="submit">Upload Images</Button>
       </form>
       <div className="mt-6">
@@ -111,7 +83,6 @@ export default function Home() {
             height={200}
           />
         ))}
-        {imageUrls && <p>IMAGES AVAILABLE</p>}
       </div>
     </div>
   );

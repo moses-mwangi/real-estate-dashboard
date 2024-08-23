@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type FormData = {
@@ -23,19 +23,29 @@ type FormData = {
 };
 
 export default function PropertyForm() {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const [loading, setLoading] = useState(false);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "image" as never,
+  });
 
   const handleUpload = async (data: FormData) => {
     setLoading(true);
     const formData = new FormData();
+
+    // Append all images
     for (let i = 0; i < data.images.length; i++) {
       formData.append("images", data.images[i]);
     }
+
+    // Append other property details
     formData.append("description", data.description);
     formData.append("about", data.about);
     formData.append("type", data.type);
@@ -48,16 +58,20 @@ export default function PropertyForm() {
     formData.append("address", data.address);
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:3008/api/property",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.success("Property successfully added");
+      if (data.images.length > 1) {
+        const res = await axios.post(
+          "http://127.0.0.1:3008/api/property",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        toast.success("Property successfully added");
+      } else {
+        toast.success("Images should be more than one");
+      }
     } catch (error) {
       console.error("Error uploading property:", error);
       toast.error("Error uploading property");
@@ -122,11 +136,32 @@ export default function PropertyForm() {
           placeholder="Description"
         />
 
-        <Input
-          type="file"
-          {...register("images", { required: true })}
-          multiple
-        />
+        <div>
+          {fields.map((field, index) => (
+            <div key={field.id} className="flex gap-4 items-center">
+              <Input
+                type="file"
+                {...register(`images`, {
+                  required: true,
+                })}
+              />
+              <Button
+                className="bg-blue-600/85 hover:bg-blue-700 mt-6"
+                type="button"
+                onClick={() => remove(index)}
+              >
+                Remove
+              </Button>
+            </div>
+          ))}
+          <Button
+            className="bg-blue-600/85 hover:bg-blue-700 mt-3"
+            type="button"
+            onClick={() => append({ image: null })}
+          >
+            Add Images
+          </Button>
+        </div>
         {errors.images && <span>At least one image is required</span>}
 
         <Button type="submit" disabled={loading}>

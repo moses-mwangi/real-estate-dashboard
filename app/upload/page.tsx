@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type FormData = {
@@ -27,18 +27,20 @@ export default function PropertyForm() {
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  // const { fields, append, remove } = useFieldArray({
-  //   control,
-  //   name: "image",
-  // });
 
   const handleUpload = async (data: FormData) => {
     setLoading(true);
     const formData = new FormData();
+
+    // Validate that at least 5 images are selected
+    // if (data.images.length < 5) {
+    //   toast.error("Please select at least 5 images.");
+    //   setLoading(false);
+    //   return;
+    // }
 
     // Append all images
     for (let i = 0; i < data.images.length; i++) {
@@ -56,6 +58,12 @@ export default function PropertyForm() {
     formData.append("city", data.city);
     formData.append("zip", data.zip.toString());
     formData.append("address", data.address);
+
+    console.log(data);
+    console.log(formData);
+    console.log(formData.getAll("images"));
+    console.log(formData.getAll("images").length);
+    console.log(formData.get("images"));
 
     try {
       const res = await axios.post(
@@ -132,12 +140,18 @@ export default function PropertyForm() {
           placeholder="Description"
         />
 
-        <Input
-          type="file"
-          {...register("images", { required: true })}
-          multiple
-        />
-        {errors.images && <span>At least one image is required</span>}
+        <div>
+          <Input
+            type="file"
+            multiple={true}
+            {...register("images", {
+              required: true,
+              //   validate: (files) =>
+              //     files.length >= 5 || "Please select at least 5 images.",
+            })}
+          />
+          {errors.images && <span>{errors.images.message}</span>}
+        </div>
 
         <Button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit Property"}
