@@ -67,3 +67,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+.bg-test {
+  background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("https://dubai.wpresidence.net/wp-content/uploads/2023/04/dubai-bg-pattern-dark.png");
+  background-repeat: repeat;
+}
+
+.bg-id {
+  background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("https://dubai.wpresidence.net/wp-content/uploads/2023/04/dubai-bg-pattern-dark.png");
+  background-repeat: repeat;
+}

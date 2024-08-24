@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
@@ -35,12 +36,11 @@ export default function PropertyForm() {
     setLoading(true);
     const formData = new FormData();
 
-    // Validate that at least 5 images are selected
-    // if (data.images.length < 5) {
-    //   toast.error("Please select at least 5 images.");
-    //   setLoading(false);
-    //   return;
-    // }
+    if (data.images.length < 5) {
+      toast.error("Please select at least 5 images.");
+      setLoading(false);
+      return;
+    }
 
     // Append all images
     for (let i = 0; i < data.images.length; i++) {
@@ -85,9 +85,9 @@ export default function PropertyForm() {
   };
 
   return (
-    <div>
+    <Card className=" mx-auto mt-5 w-[60svw] px-6 py-8 bg-slate-100">
       <form
-        className="w-[90svh] mx-auto mt-12 grid grid-cols-2 gap-5"
+        className="w-full mx-auto mt-12 grid grid-cols-2 gap-5"
         onSubmit={handleSubmit(handleUpload)}
       >
         <Input
@@ -146,17 +146,21 @@ export default function PropertyForm() {
             multiple={true}
             {...register("images", {
               required: true,
-              //   validate: (files) =>
-              //     files.length >= 5 || "Please select at least 5 images.",
+              validate: (files) =>
+                files.length >= 5 || "Please select at least 5 images.",
             })}
           />
-          {errors.images && <span>{errors.images.message}</span>}
+          {errors.images && (
+            <span className="text-[13px] font-medium text-red-600">
+              {errors.images.message}
+            </span>
+          )}
         </div>
 
         <Button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit Property"}
         </Button>
       </form>
-    </div>
+    </Card>
   );
 }
