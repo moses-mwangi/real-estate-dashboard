@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface IUser {
@@ -14,9 +15,10 @@ export interface IUser {
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
   const [allUsers, setAllUsers] = useState<IUser[] | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = document.cookie.split("=")[1];
 
     if (token) {
       getCurrentUser(token);
@@ -54,7 +56,8 @@ function useUser() {
   }
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    document.cookie = `token=; path=/`;
+    router.push("/login");
     setCurUser(null);
   };
 

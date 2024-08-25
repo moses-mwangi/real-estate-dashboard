@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
-import DashBoardNavbar from "./navbar/DashBoardNavbar";
-import DashBoardSideBar from "./sidebar/DashBoardSideBar";
-import DashBoardMain from "./main/DashBoardMain";
+import DashBoardSideBar from "../dashboard/sidebar/DashBoardSideBar";
+import DashBoardNavbar from "../dashboard/navbar/DashBoardNavbar";
+import AddingAgentPage from "./AddingAgentPage";
 
-export default function DashBoard() {
+export default function Agent() {
   return (
     <div className="">
       <div className="grid grid-cols-[1fr_4fr] h-svh">
         <DashBoardSideBar />
         <div className="h-svh">
           <DashBoardNavbar />
-          <DashBoardMain />
+          <AddingAgentPage />
         </div>
       </div>
     </div>

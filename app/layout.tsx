@@ -3,6 +3,7 @@ import { Inter, Merriweather } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
+import LoginPage from "./login/page";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -33,7 +34,12 @@ export default function RootLayout({
         style={{ fontFamily: "var(--Inter)" }}
       >
         <Toaster position="top-center" />
-        <main>{children}</main>
+        <div>
+          {/* <LoginPage /> */}
+          <div>
+            <main>{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import Image from "next/image";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -14,6 +15,7 @@ interface FormData {
 
 export default function Home() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const params = usePathname();
 
   const {
     register,
@@ -52,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className=" hidden">
       <form
         className="w-[50svh] mx-auto mt-20"
         onSubmit={handleSubmit(handleUpload)}

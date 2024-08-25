@@ -1,9 +1,9 @@
 import React from "react";
-import LoginForm from "./LoginForm";
 import Image from "next/image";
 
 import logo from "../../public/images/image copy 11.png";
 import log from "../../public/images/image.png";
+import ForgotPasswordForm from "./ForgotPassword";
 
 export default function LoginPage() {
   return (
@@ -17,7 +17,7 @@ export default function LoginPage() {
             Log in to your account
           </h1>
         </div>
-        <LoginForm />
+        <ForgotPasswordForm />
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
-import React from "react";
-import LoginForm from "./LoginForm";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
-import logo from "../../public/images/image copy 11.png";
 import log from "../../public/images/image.png";
+import ResetPasswordForm from "./ResePasswordForm";
 
 export default function LoginPage() {
   return (
@@ -17,7 +16,9 @@ export default function LoginPage() {
             Log in to your account
           </h1>
         </div>
-        <LoginForm />
+        <Suspense fallback={<p>Loading...</p>}>
+          <ResetPasswordForm />
+        </Suspense>
       </div>
     </div>
   );
