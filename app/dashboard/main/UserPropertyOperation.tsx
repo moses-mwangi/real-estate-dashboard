@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { EyeIcon, PenBox } from "lucide-react";
-import { LuMoreVertical, LuTrash2 } from "react-icons/lu";
+import { LuMoreVertical } from "react-icons/lu";
 import DeleteProperty from "./DeleteProperty";
 
 interface Id {

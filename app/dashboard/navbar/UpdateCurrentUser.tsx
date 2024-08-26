@@ -11,17 +11,22 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type UpdateMeFormData = {
-  role: string;
+  // role: string;
   name: string;
 };
 
-export default function UpdateCurrentUser() {
+interface CloseModal {
+  handleModalClose: () => void;
+}
+
+export default function UpdateCurrentUser({ handleModalClose }: CloseModal) {
   const { register, handleSubmit } = useForm<UpdateMeFormData>();
   const [loading, setLoading] = useState(false);
   const { curUser } = useUser();
 
   const updateMe: SubmitHandler<UpdateMeFormData> = async (data) => {
-    console.log(data);
+    console.log("data:", data);
+
     try {
       setLoading(true);
 
@@ -40,7 +45,7 @@ export default function UpdateCurrentUser() {
         },
       });
 
-      console.log("API response:", res.data);
+      handleModalClose();
 
       toast.success("Profile updated successfully");
       setLoading(false);
@@ -66,7 +71,7 @@ export default function UpdateCurrentUser() {
     <Card className="px-12 py-10">
       <form onSubmit={handleSubmit(updateMe)}>
         <div className="flex flex-col gap-4">
-          <div>
+          <div className="flex flex-col gap-[4px]">
             <Label htmlFor="name">User Name</Label>
             <Input
               defaultValue={curUser?.name}
@@ -75,21 +80,28 @@ export default function UpdateCurrentUser() {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-[4px]">
             <Label htmlFor="name">User Email</Label>
-            <Input value={curUser?.email} disabled type="text" />
+            <Input defaultValue={curUser?.email} disabled type="text" />
           </div>
-          <div>
-            <Label htmlFor="role">User Role</Label>
+
+          <div className="flex flex-col gap-[4px]">
+            <Label className="text-[15px]" htmlFor="role">
+              User Role
+            </Label>
             <Input
-              value={curUser?.role}
+              defaultValue={curUser?.role}
               disabled
               type="text"
-              {...register("role", { required: true })}
+              // {...register("role")}
             />
           </div>
         </div>
-        <Button className="w-full mt-2" type="submit">
+        <Button
+          className="w-full bg-blue-600 hover:bg-blue-700 mt-2"
+          type="submit"
+          disabled={loading}
+        >
           {loading ? loader : "Update Profile"}
         </Button>
       </form>

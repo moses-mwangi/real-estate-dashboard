@@ -10,7 +10,7 @@ export default function UserPhoto() {
   const { curUser } = useUser();
 
   return (
-    <div className="px-12 py-2 w-full flex justify-end border-gray-200 border-b border-solid">
+    <div className="px-12 py-2 w-full flex justify-end">
       {curUser?.photo !== "" ? (
         <div className="">
           <Image
@@ -22,7 +22,7 @@ export default function UserPhoto() {
           />
         </div>
       ) : (
-        <Button className=" bg-pink-600 w-11 h-11 rounded-full text-slate-50 font-semibold">
+        <Button className=" bg-pink-600 hover:bg-pink-700 w-11 h-11 rounded-full text-slate-50 font-semibold">
           {curUser.name[0].toLocaleUpperCase()}
         </Button>
       )}

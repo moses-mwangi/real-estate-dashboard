@@ -3,25 +3,19 @@
 import React, { useState } from "react";
 import useUser from "@/app/login/useUsers";
 import Image from "next/image";
-import { LogOut, User, Pencil } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import us from "../../../public/assets/pro 4.png";
 import UserPhoto from "./UserPhoto";
 import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
 import UserProfileSetting from "./UserProfileSetting";
-import { useRouter } from "next/navigation";
 
 export default function UserDetails() {
   const [isOpen, setIsOpen] = useState(false);
-
   const { curUser, logOut } = useUser();
-  const router = useRouter();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleProfilePicUpload = () => {
-    router.push("/profile/upload-photo");
   };
 
   return (
@@ -29,26 +23,16 @@ export default function UserDetails() {
       <div onClick={toggleDropdown} className="cursor-pointer">
         <UserPhoto />
       </div>
-
       {isOpen && (
         <div className="absolute right-8 mt-1 w-[260px] p-4 bg-white shadow-lg rounded-lg z-10">
           <div className="">
-            <div className="flex items-center space-x-4 relative">
-              <div
-                className="flex-shrink-0 cursor-pointer relative"
-                onClick={() => {}}
-              >
+            <div className="flex items-center space-x-4">
+              <div className="flex-shrink-0">
                 <Image
                   className="rounded-full w-12 h-12"
                   src={curUser?.photo || us}
                   alt="User Avatar"
                 />
-                <button
-                  onClick={handleProfilePicUpload}
-                  className="absolute bottom-2 -right-2 p-1 bg-white border rounded-full shadow-sm hover:bg-gray-100"
-                >
-                  <Pencil className="w-[14px] h-[14px] text-gray-600" />
-                </button>
               </div>
               <div>
                 <h4 className="font-semibold text-gray-800">{curUser?.name}</h4>

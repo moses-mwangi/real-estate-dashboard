@@ -2,19 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import useSearchProperty from "../../addProperty/useSearchProperty";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { Table } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
-import { ListFilter } from "lucide-react";
-import { LuMoreVertical } from "react-icons/lu";
 import UserPropertyOperation from "./UserPropertyOperation";
 
 export default function CurrentUserProperties() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const { properties } = useSearchProperty();
-  const router = useRouter();
 
   useEffect(() => {
     async function fetchAgents() {
@@ -42,13 +37,12 @@ export default function CurrentUserProperties() {
     <div className="flex flex-col gap-6">
       <Separator className=" bg-slate-200 h-[2px]" />
       {properties?.map((el, index) => (
-        <>
+        <div key={el._id}>
           <div
-            // className="bg-card border-b-8 border-solid border-b-orange-200 shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
             className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
             key={el._id}
           >
-            <div className="overflow-hidden z-30 relative rounded-l-md cursor-zoom-out">
+            <div className="overflow-hidden relative rounded-l-md cursor-zoom-out">
               {el.image[0] && (
                 <Image
                   className=" w-full h-auto hover:scale-105 transition-all duration-200"
@@ -64,11 +58,11 @@ export default function CurrentUserProperties() {
               )}
               <GrNext
                 onClick={() => handleNextImage(index, el.image.length)}
-                className="w-8 h-8 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+                className="w-8 h-8 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2  text-slate-100"
               />
               <GrPrevious
                 onClick={() => handlePreviousImage(index, el.image.length)}
-                className="w-8 h-8 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+                className="w-8 h-8 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 text-slate-100"
               />
             </div>
             <div
@@ -96,7 +90,7 @@ export default function CurrentUserProperties() {
           </div>
 
           <Separator className="bg-slate-300" />
-        </>
+        </div>
       ))}
     </div>
   );
