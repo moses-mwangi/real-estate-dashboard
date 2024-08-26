@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import DashBoardNavbar from "./navbar/DashBoardNavbar";
+import DashBoardNavbar from "./navbar/Navbar";
 import DashBoardSideBar from "./sidebar/DashBoardSideBar";
 import DashBoardMain from "./main/DashBoardMain";
 

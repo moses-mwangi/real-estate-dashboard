@@ -53,19 +53,19 @@ export default function SideBarActivity() {
           key={el.label}
           href={el.ref}
           className={`${
-            el.ref === path ? " bg-slate-200" : ""
-          }   flex gap-2 items-center py-2 px-4 rounded-sm hover:bg-slate-200 transition-all duration-150`}
+            el.ref === path ? " bg-gray-200" : ""
+          }   flex gap-2 items-center py-2 px-4 rounded-sm hover:bg-gray-200 transition-all duration-150`}
         >
           <span
             className={`${
-              el.ref === path ? " text-blue-700/90" : " text-slate-500"
+              el.ref === path ? " text-blue-700/90" : " text-gray-500"
             }  font-medium`}
           >
             {el.icon}
           </span>
           <span
             className={`${
-              el.ref === path ? " text-blue-700/90" : " text-slate-500"
+              el.ref === path ? " text-blue-700/90" : " text-gray-700"
             } font-medium`}
           >
             {el.label}

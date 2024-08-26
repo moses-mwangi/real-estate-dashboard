@@ -1,6 +1,6 @@
 import React from "react";
 import DashBoardSideBar from "../sidebar/DashBoardSideBar";
-import DashBoardNavbar from "../navbar/DashBoardNavbar";
+import DashBoardNavbar from "../navbar/Navbar";
 
 export default function page() {
   return (

@@ -2,7 +2,7 @@
 
 import React from "react";
 import DashBoardSideBar from "../dashboard/sidebar/DashBoardSideBar";
-import DashBoardNavbar from "../dashboard/navbar/DashBoardNavbar";
+import DashBoardNavbar from "../dashboard/navbar/Navbar";
 import AddingAgentPage from "./AddingAgentPage";
 
 export default function Agent() {

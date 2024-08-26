@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
-import useUser from "../../login/useUsers";
-import us from "../../../public/assets/pro 4.png";
-import Image from "next/image";
+import useUser from "@/app/login/useUsers";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import React from "react";
+import us from "../../../public/assets/pro 4.png";
 
-export default function DashBoardNavbar() {
-  const { curUser, logOut } = useUser();
+export default function UserPhoto() {
+  const { curUser } = useUser();
 
   return (
     <div className="px-12 py-2 w-full flex justify-end border-gray-200 border-b border-solid">

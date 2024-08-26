@@ -1,0 +1,82 @@
+"use client";
+
+import React, { useState } from "react";
+import useUser from "@/app/login/useUsers";
+import Image from "next/image";
+import { LogOut, Settings, User } from "lucide-react";
+import us from "../../../public/assets/pro 4.png";
+import UserPhoto from "./UserPhoto";
+import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
+import UserProfileSetting from "./UserProfileSetting";
+
+export default function UserDetails() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { curUser, logOut } = useUser();
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="relative">
+      <div onClick={toggleDropdown} className="cursor-pointer">
+        <UserPhoto />
+      </div>
+      {isOpen && (
+        <div className="absolute right-8 mt-1 w-[260px] p-4 bg-white shadow-lg rounded-lg z-10">
+          <div className="">
+            <div className="flex items-center space-x-4">
+              <div className="flex-shrink-0">
+                <Image
+                  className="rounded-full w-12 h-12"
+                  src={curUser?.photo || us}
+                  alt="User Avatar"
+                />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800">{curUser?.name}</h4>
+                <p className="text-sm text-gray-600">{curUser?.email}</p>
+              </div>
+            </div>
+            <hr className="mt-4 mb-3" />
+
+            <div className="">
+              <div className="w-full cursor-pointer duration-150 transition-all text-gray-800 hover:bg-slate-100 rounded-sm pl-3 py-2">
+                <span className=" text-sm font-medium flex gap-3">
+                  <User className=" w-5 h-5 text-gray-600" /> {curUser?.name}
+                </span>
+              </div>
+              <div className="w-full cursor-pointer duration-150 transition-all text-gray-800 hover:bg-slate-100 rounded-sm pl-3 py-2">
+                <span className=" text-sm font-medium flex gap-3">
+                  <MdMarkEmailUnread className=" w-5 h-5 text-gray-600" />
+                  {curUser?.email}
+                </span>
+              </div>
+              <div className="w-full cursor-pointer duration-150 transition-all text-gray-800 hover:bg-slate-100 rounded-sm pl-3 py-2">
+                <span className=" text-sm font-medium flex gap-3">
+                  <MdAdminPanelSettings className=" w-5 h-5 text-gray-600" />
+                  {curUser?.role}
+                </span>
+              </div>
+
+              <UserProfileSetting toggleDropdown={toggleDropdown} />
+
+              <div
+                className="w-full cursor-pointer duration-150 transition-all text-gray-600 hover:text-blue-600 hover:bg-slate-100 rounded-sm pl-3 py-2"
+                onClick={() => {
+                  logOut();
+                  toggleDropdown();
+                }}
+              >
+                <span className="text-sm font-medium flex gap-3 text-gray-800">
+                  <LogOut className=" w-5 h-5 text-gray-600" /> Sign Out
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
