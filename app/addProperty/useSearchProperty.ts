@@ -19,6 +19,7 @@ interface Property {
   zipcode: number;
   address: string;
   position: number[];
+  userId: [{ _id: string; name: string; email: string }];
 }
 
 interface Data {
@@ -36,9 +37,7 @@ function useSearchProperty() {
 
   useEffect(() => {
     async function fetchAgents() {
-      const propety = await axios.get(
-        "https://real-estate-api-azure.vercel.app/api/property"
-      );
+      const propety = await axios.get("http://127.0.0.1:3008/api/property");
       setProperties(propety.data.data);
     }
 

@@ -6,10 +6,17 @@ import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Separator } from "@/components/ui/separator";
 import UserPropertyOperation from "./UserPropertyOperation";
+import useUser from "@/app/login/useUsers";
+import { Button } from "@/components/ui/button";
 
 export default function CurrentUserProperties() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const { properties } = useSearchProperty();
+  const { curUser } = useUser();
+
+  const userProperties = properties.filter(
+    (el) => el.userId[0]._id === curUser?._id
+  );
 
   useEffect(() => {
     async function fetchAgents() {
@@ -36,7 +43,7 @@ export default function CurrentUserProperties() {
   return (
     <div className="flex flex-col gap-6">
       <Separator className=" bg-slate-200 h-[2px]" />
-      {properties?.map((el, index) => (
+      {userProperties?.map((el, index) => (
         <div key={el._id}>
           <div
             className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"

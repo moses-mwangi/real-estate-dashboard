@@ -46,7 +46,6 @@ export default function AddPropertyPage() {
     handleSubmit,
     formState: { errors },
     setValue,
-    reset,
   } = useForm<FormData>();
 
   const handleSelectChange = (name: keyof FormData, value: string) => {
@@ -104,7 +103,6 @@ export default function AddPropertyPage() {
         }
       );
       toast.success("Property successfully added");
-      reset();
     } catch (error) {
       console.error("Error uploading property:", error);
       toast.error("Error uploading property");
@@ -140,12 +138,17 @@ export default function AddPropertyPage() {
               {...register("about", { required: true })}
               placeholder="Add small description about property"
             />
+            {/* <Input
+              type="text"
+              {...register("type", { required: true })}
+              placeholder="Type"
+            /> */}
 
             <div>
               <Select
                 onValueChange={(value) => handleSelectChange("type", value)}
               >
-                <SelectTrigger className="w-full text-[13px] text-slate-500">
+                <SelectTrigger className="w-full border-none text-[13px] text-slate-500">
                   <SelectValue placeholder="Property Category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -227,18 +230,16 @@ export default function AddPropertyPage() {
             <Input
               defaultValue={curUser?._id}
               {...register("userId", { required: true })}
-              type="text"
+              type="hidden"
             />
 
             <Input
               type="number"
-              step="0.00001"
               {...register("latitude", { required: true })}
               placeholder="Latitude"
             />
             <Input
               type="number"
-              step="0.00001"
               {...register("longitude", { required: true })}
               placeholder="Longitude"
             />
