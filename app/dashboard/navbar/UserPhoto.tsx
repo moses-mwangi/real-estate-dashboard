@@ -11,19 +11,19 @@ export default function UserPhoto() {
 
   return (
     <div className="px-12 py-2 w-full flex justify-end">
-      {curUser?.photo !== "" ? (
+      {curUser?.photo ? (
         <div className="">
           <Image
-            className=" rounded-full w-11 h-11"
-            src={curUser?.photo || us}
+            className=" rounded-full w-12 h-12"
+            src={curUser?.photo}
             alt="user photo"
-            width={70}
+            width={100}
             height={100}
           />
         </div>
       ) : (
-        <Button className=" bg-pink-600 hover:bg-pink-700 w-11 h-11 rounded-full text-slate-50 font-semibold">
-          {curUser.name[0].toLocaleUpperCase()}
+        <Button className=" bg-pink-600 hover:bg-pink-700 w-12 h-12 rounded-full text-slate-50 font-semibold">
+          {curUser?.name[0].toLocaleUpperCase()}
         </Button>
       )}
     </div>

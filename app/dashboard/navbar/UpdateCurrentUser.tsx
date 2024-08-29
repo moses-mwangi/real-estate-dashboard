@@ -30,7 +30,7 @@ export default function UpdateCurrentUser({ handleModalClose }: CloseModal) {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("token");
+      const token = document.cookie.split("=")[1];
 
       if (!token) {
         toast.error("User is not authenticated. Please log in.");

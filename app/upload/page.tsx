@@ -46,6 +46,7 @@ export default function PropertyForm() {
     for (let i = 0; i < data.images.length; i++) {
       formData.append("images", data.images[i]);
     }
+  
 
     // Append other property details
     formData.append("description", data.description);
@@ -59,13 +60,14 @@ export default function PropertyForm() {
     formData.append("zip", data.zip.toString());
     formData.append("address", data.address);
 
-    console.log(data);
-    console.log(formData);
-    console.log(formData.getAll("images"));
-    console.log(formData.getAll("images").length);
-    console.log(formData.get("images"));
+    // console.log(data);
+    // console.log(formData);
+    // console.log(formData.getAll("images"));
+    // console.log(formData.getAll("images").length);
+    // console.log(formData.get("images"));
 
     try {
+      setLoading(true);
       const res = await axios.post(
         "http://127.0.0.1:3008/api/property",
         formData,
@@ -76,6 +78,7 @@ export default function PropertyForm() {
         }
       );
       toast.success("Property successfully added");
+      setLoading(false);
     } catch (error) {
       console.error("Error uploading property:", error);
       toast.error("Error uploading property");

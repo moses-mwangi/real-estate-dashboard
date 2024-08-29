@@ -6,7 +6,11 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
 
   if (!token) {
-    if (pathname !== "/login") {
+    if (
+      pathname !== "/login" &&
+      pathname !== "/forgotPassword" &&
+      pathname !== "/resetPassword"
+    ) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
   } else {

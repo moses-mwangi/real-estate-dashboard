@@ -9,19 +9,19 @@ import UserPhoto from "./UserPhoto";
 import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
 import UserProfileSetting from "./UserProfileSetting";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import UserImageUpload from "./UserImageUpload copy";
+// import UserImageUpload from "./UserImageUpload";
 
 export default function UserDetails() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUpload, setIsUpload] = useState(false);
 
   const { curUser, logOut } = useUser();
   const router = useRouter();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleProfilePicUpload = () => {
-    router.push("/profile/upload-photo");
   };
 
   return (
@@ -36,17 +36,30 @@ export default function UserDetails() {
             <div className="flex items-center space-x-4 relative">
               <div
                 className="flex-shrink-0 cursor-pointer relative"
-                onClick={() => {}}
+                onClick={() => {
+                  setIsUpload(true);
+                }}
               >
-                <Image
-                  className="rounded-full w-12 h-12"
-                  src={curUser?.photo || us}
-                  alt="User Avatar"
-                />
-                <button
-                  onClick={handleProfilePicUpload}
-                  className="absolute bottom-2 -right-2 p-1 bg-white border rounded-full shadow-sm hover:bg-gray-100"
-                >
+                {isUpload === true && (
+                  <UserImageUpload
+                    isUpload={isUpload}
+                    setIsUpload={setIsUpload}
+                  />
+                )}
+                {curUser?.photo ? (
+                  <Image
+                    className="rounded-full w-12 h-12"
+                    src={curUser?.photo}
+                    alt="User Avatar"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Button className=" bg-pink-600 hover:bg-pink-700 w-12 h-12 rounded-full text-slate-50 font-semibold">
+                    {curUser?.name[0].toLocaleUpperCase()}
+                  </Button>
+                )}
+                <button className="absolute bottom-2 -right-2 p-1 bg-white border rounded-full shadow-sm hover:bg-gray-100">
                   <Pencil className="w-[14px] h-[14px] text-gray-600" />
                 </button>
               </div>
