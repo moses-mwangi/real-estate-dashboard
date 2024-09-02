@@ -1,20 +1,10 @@
 "use client";
 
-import {
-  HomeIcon,
-  House,
-  HouseIcon,
-  LucideHouse,
-  LucideUsers2,
-  Settings,
-  ShoppingCart,
-} from "lucide-react";
+import { HomeIcon, LucideHouse, LucideUsers2, Settings } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { LiaStoreSolid } from "react-icons/lia";
+import React, { useState } from "react";
 import { LuExternalLink } from "react-icons/lu";
-import { usePathname, useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import Modal from "../Modal";
 import UpdateCurrentUser from "../user/UpdateCurrentUser";
 import UpdateCurrentUserPassword from "../user/UpdateCurrentUserPassword";
