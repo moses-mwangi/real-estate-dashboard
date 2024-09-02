@@ -6,7 +6,7 @@ import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Separator } from "@/components/ui/separator";
 import UserPropertyOperation from "./UserPropertyOperation";
-import useUser from "@/app/login/useUsers";
+import useUser from "@/app/components/user/useUsers";
 import { Button } from "@/components/ui/button";
 
 export default function CurrentUserProperties() {

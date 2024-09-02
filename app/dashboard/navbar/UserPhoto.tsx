@@ -1,6 +1,6 @@
 "use client";
 
-import useUser from "@/app/login/useUsers";
+import useUser from "@/app/components/user/useUsers";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";

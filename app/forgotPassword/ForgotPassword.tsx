@@ -11,7 +11,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import axios from "axios";
-import useUser from "../login/useUsers";
+import useUser from "../components/user/useUsers";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),

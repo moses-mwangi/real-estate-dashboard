@@ -22,15 +22,6 @@ interface Property {
   userId: [{ _id: string; name: string; email: string }];
 }
 
-interface Data {
-  type: string;
-  bathrooms: number;
-  bedrooms: number;
-  price: number;
-  city: string;
-  category: string;
-}
-
 function useSearchProperty() {
   const [properties, setProperties] = useState<Property[]>([]);
   const router = useRouter();

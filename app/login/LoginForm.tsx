@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useUser from "./useUsers";
+import useUser from "../components/user/useUsers";
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -45,6 +45,8 @@ export default function LoginForm() {
 
   const handleLogin: SubmitHandler<Login> = async (data) => {
     const validateUser = allUsers?.find((el) => el.email === data.email);
+
+    console.log(allUsers);
 
     if (!validateUser) {
       toast.error("Invalid email and password");

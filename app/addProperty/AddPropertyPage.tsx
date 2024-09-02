@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import useUser from "../login/useUsers";
+import useUser from "../components/user/useUsers";
 import {
   Select,
   SelectContent,
@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   images: FileList;
@@ -40,6 +41,7 @@ type FormData = {
 export default function AddPropertyPage() {
   const [loading, setLoading] = useState(false);
   const { curUser } = useUser();
+  const router = useRouter();
 
   const {
     register,
@@ -103,7 +105,9 @@ export default function AddPropertyPage() {
           },
         }
       );
+      reset();
       toast.success("Property successfully added");
+      router.push("/dashboard");
       reset();
     } catch (error) {
       console.error("Error uploading property:", error);
