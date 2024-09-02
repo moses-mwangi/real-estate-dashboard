@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import useUser from "@/app/components/user/useUsers";
+import useUser from "@/app/components/user/useUser";
 import Image from "next/image";
 import { LogOut, User, Pencil } from "lucide-react";
 import us from "../../../public/assets/pro 4.png";

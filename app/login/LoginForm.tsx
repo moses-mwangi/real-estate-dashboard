@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useUser from "../components/user/useUsers";
+import useUser from "../components/user/useUser";
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -53,7 +53,8 @@ export default function LoginForm() {
       return;
     }
 
-    const filterUser = validateUser?.role === "user";
+    const filterUser =
+      validateUser?.role === "agent" || validateUser?.role === "admin";
 
     if (!filterUser) {
       toast.error("Only the admin users can log in");

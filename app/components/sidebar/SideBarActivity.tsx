@@ -15,12 +15,15 @@ import { LiaStoreSolid } from "react-icons/lia";
 import { LuExternalLink } from "react-icons/lu";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import Modal from "../Modal";
+import UpdateCurrentUser from "../user/UpdateCurrentUser";
+import UpdateCurrentUserPassword from "../user/UpdateCurrentUserPassword";
 
 const links = [
   {
-    label: "My Website",
+    label: "Website",
     icon: <LuExternalLink className="w-[22px] h-[22px]" />,
-    ref: "https://food-delivery-bkrk.vercel.app/",
+    ref: "https://real-estate-mu-peach.vercel.app/",
   },
   {
     label: "Dashboard",
@@ -37,15 +40,23 @@ const links = [
     icon: <LucideUsers2 className="w-[22px] h-[22px]" />,
     ref: "/addAgent",
   },
-  {
-    label: "Setting",
-    icon: <Settings className="w-[22px] h-[22px]" />,
-    ref: "/setting",
-  },
+  // {
+  //   label: "Setting",
+  //   icon: <Settings className="w-[22px] h-[22px]" />,
+  //   ref: "/setting",
+  // },
 ];
 
 export default function SideBarActivity() {
   const path = usePathname();
+
+  const [toggleForm, setToggleForm] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="px-3 pt-8 flex flex-col gap-2">
       {links.map((el) => (
@@ -72,6 +83,38 @@ export default function SideBarActivity() {
           </span>
         </Link>
       ))}
+      <div>
+        <div
+          className="pl-4 cursor-pointer hover:bg-gray-200 rounded-md py-2"
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        >
+          <span
+            className={`flex gap-2 items-center  text-gray-700 hover:text-blue-700/90 font-medium`}
+          >
+            <Settings className="w-[22px] h-[22px]" /> Setting
+          </span>
+        </div>
+
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          title="Customize your profile"
+        >
+          {toggleForm === false ? (
+            <UpdateCurrentUser handleModalClose={handleModalClose} />
+          ) : (
+            <UpdateCurrentUserPassword handleModalClose={handleModalClose} />
+          )}
+          <p
+            className="mt-6 flex text-blue-600 hover:text-blue-700 leading-6 text-[15px] font-medium cursor-pointer"
+            onClick={() => setToggleForm((prev) => !prev)}
+          >
+            {toggleForm ? "Back to Profile" : "Change Password"}
+          </p>
+        </Modal>
+      </div>
     </div>
   );
 }

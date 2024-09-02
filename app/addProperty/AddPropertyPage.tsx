@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import useUser from "../components/user/useUsers";
+import useUser from "../components/user/useUser";
 import {
   Select,
   SelectContent,

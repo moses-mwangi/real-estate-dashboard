@@ -7,7 +7,7 @@ import { IoMdCloudUpload } from "react-icons/io";
 import Cropper, { Area } from "react-easy-crop";
 import Slider from "@mui/material/Slider";
 import Image from "next/image";
-import useUser from "./useUsers";
+import useUser from "./useUser";
 import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";

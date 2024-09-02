@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { IoMdCloudUpload } from "react-icons/io";
 import Image from "next/image";
-import useUser from "./useUsers";
+import useUser from "./useUser";
 import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";

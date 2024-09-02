@@ -1,6 +1,6 @@
 "use client";
 
-import useUser from "@/app/components/user/useUsers";
+import useUser from "@/app/components/user/useUser";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
