@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 
 import log from "../../public/images/image.png";
-import ResetPasswordForm from "./ResePasswordForm";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 export default function LoginPage() {
   return (

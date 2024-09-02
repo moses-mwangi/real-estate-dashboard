@@ -1,6 +1,6 @@
 import React from "react";
-import DashBoardSideBar from "../dashboard/sidebar/DashBoardSideBar";
-import DashBoardNavbar from "../dashboard/navbar/Navbar";
+import DashBoardSideBar from "../components/sidebar/DashBoardSideBar";
+import DashBoardNavbar from "../components/navbar/Navbar";
 
 export default function SettingPage() {
   return (

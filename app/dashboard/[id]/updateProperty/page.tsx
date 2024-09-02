@@ -1,6 +1,6 @@
 import React from "react";
-import DashBoardSideBar from "../../sidebar/DashBoardSideBar";
-import DashBoardNavbar from "../../navbar/Navbar";
+import DashBoardSideBar from "../../../components/sidebar/DashBoardSideBar";
+import DashBoardNavbar from "../../../components/navbar/Navbar";
 
 export default function UpdateProperty() {
   return (

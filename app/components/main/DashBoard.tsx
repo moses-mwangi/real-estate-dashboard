@@ -1,5 +1,5 @@
 import React from "react";
-import CurrentUserProperties from "./UserProperties";
+import CurrentUserProperties from "../property/UserProperties";
 import DashBoardOperation from "./DashBoardOperation";
 
 export default function DashBoardMain() {

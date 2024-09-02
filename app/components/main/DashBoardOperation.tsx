@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { Suspense } from "react";
-import SortProperty from "./SortProperty";
-import FilterProperty from "./FilterProperty";
+import SortProperty from "../property/SortProperty";
+import FilterProperty from "../property/FilterProperty";
 
 export default function DashBoardOperation() {
   const router = useRouter();

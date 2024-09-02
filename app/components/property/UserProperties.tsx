@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import useSearchProperty from "../../addProperty/useSearchProperty";
+import useSearchProperty from "./useProperty";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Separator } from "@/components/ui/separator";

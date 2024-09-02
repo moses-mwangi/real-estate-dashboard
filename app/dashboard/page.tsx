@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import DashBoardNavbar from "./navbar/Navbar";
-import DashBoardSideBar from "./sidebar/DashBoardSideBar";
-import DashBoardMain from "./main/DashBoardMain";
+import DashBoardNavbar from "../components/navbar/Navbar";
+import DashBoardSideBar from "../components/sidebar/DashBoardSideBar";
+import DashBoardMain from "../components/main/DashBoard";
 
 export default function DashBoard() {
   return (
