@@ -51,6 +51,7 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
       setLoading(true);
       await axios.post(
         "https://real-estate-api-azure.vercel.app/api/users/updateImage",
+        // "http://127.0.0.1:3008/api/users/updateImage",
         formData,
         {
           headers: {
