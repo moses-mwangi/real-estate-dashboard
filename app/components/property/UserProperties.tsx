@@ -6,14 +6,11 @@ import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Separator } from "@/components/ui/separator";
 import UserPropertyOperation from "./DeleteUpdateProperty";
-import useUser from "@/app/components/user/useUser";
-import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 
 export default function CurrentUserProperties() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const { properties, userProperties } = useSearchProperty();
-
   const searchParams = useSearchParams();
 
   useEffect(() => {
