@@ -5,19 +5,22 @@ import { PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { Suspense } from "react";
 import SortProperty from "../property/SortProperty";
-import FilterProperty from "../property/FilterProperty";
+import useSearchProperty from "../property/useProperty";
 
 export default function DashBoardOperation() {
   const router = useRouter();
+  const { userProperties } = useSearchProperty();
 
   return (
     <div className="flex justify-between items-center mb-7">
-      <Suspense fallback={<p>Loading...</p>}>
-        <SortProperty />
-      </Suspense>
+      <div>
+        <p className="font-medium text-2xl">
+          Currently you have {userProperties.length} property
+        </p>
+      </div>
       <div className="flex items-center gap-4">
         <Suspense fallback={<p>Loading...</p>}>
-          <FilterProperty />
+          <SortProperty />
         </Suspense>
         <Button
           className=" bg-blue-600 h-[39px] hover:bg-blue700"

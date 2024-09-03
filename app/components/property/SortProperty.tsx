@@ -1,43 +1,120 @@
+// "use client";
+
+// import React, { useState } from "react";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuGroup,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { ListFilter } from "lucide-react";
+// import { Card } from "@/components/ui/card";
+
+// const sorts = [{ label: "price" }, { label: "createdAt" }, { label: "type" }];
+
+// export default function SortProperty() {
+//   const router = useRouter();
+//   const searchParams = useSearchParams();
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <div>
+//       <div
+//         className="hover:bg-slate-300 relative transition-all duration-150 cursor-pointer rounded-md w-9 h-9 flex items-center justify-center"
+//         onClick={() => {
+//           setIsOpen((el) => !el);
+//         }}
+//       >
+//         <ListFilter className="w-7 h-7" />
+//         {isOpen === true && (
+//           <Card className=" absolute top-14 p-2 rounded-sm">
+//             {sorts.map((el) => (
+//               <div
+//                 className="flex"
+//                 key={el.label}
+//                 onClick={() => {
+//                   const params = new URLSearchParams(searchParams);
+//                   params.set("SortBy", el.label);
+//                   router.push("?" + params.toString());
+//                   router.refresh();
+//                 }}
+//               >
+//                 SortBy {el.label}
+//               </div>
+//             ))}
+//           </Card>
+//         )}
+//       </div>
+//     </div>
+//     // <DropdownMenu>
+//     //   <DropdownMenuTrigger className="bg-inherit border-none max-w-none">
+//     //     <ListFilter className="w-7 h-7" />
+//     //   </DropdownMenuTrigger>
+//     //   <DropdownMenuContent>
+//     //     <DropdownMenuGroup>
+//     //       {sorts.map((el) => (
+//     //         <DropdownMenuItem
+//     // key={el.label}
+//     // onClick={() => {
+//     //   const params = new URLSearchParams(searchParams);
+//     //   params.set("SortBy", el.label);
+//     //   router.push("?" + params.toString());
+//     //   router.refresh();
+//     // }}
+//     //         >
+//     //           SortBy ( {el.label} )
+//     //         </DropdownMenuItem>
+//     //       ))}
+//     //     </DropdownMenuGroup>
+//     //   </DropdownMenuContent>
+//     // </DropdownMenu>
+//   );
+// }
 "use client";
 
+import React, { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ListFilter } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
 
-const periods = [
-  { label: "Date", value: "date" },
-  { label: "Bedrooms", value: "bedrooms" },
-  { label: "Bathrooms", value: "Bathrooms" },
-];
+const sorts = [{ label: "price" }, { label: "createdAt" }, { label: "type" }];
 
 export default function SortProperty() {
-  const path = usePathname();
   const router = useRouter();
-  const searchParam = useSearchParams();
+  const searchParams = useSearchParams();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const match = searchParam.get("sortBy") ? searchParam.get("sortBy") : "date";
+  const handleSortSelection = (sortLabel: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("SortBy", sortLabel);
+    router.push("?" + params.toString());
+    router.refresh();
+    setIsOpen(false); // Close the dropdown after selecting an option
+  };
 
   return (
-    <Card className="flex md:flex-row flex-col  gap-4 rounded-sm py-[3px] px-2">
-      {periods.map((period) => (
-        <span
-          key={period.label}
-          className={`${
-            period.value.toString() === match
-              ? "bg-blue-600 text-slate-200"
-              : ""
-          } hover:bg-blue-600 px-3 py-[5px] text-slate-700 hover:text-slate-100  rounded-sm cursor-pointer transition-colors`}
-          onClick={() => {
-            const params = new URLSearchParams(searchParam);
-            params.set("sortBy", period.value.toString());
-            const query = params.size ? "?" + params.toString() : "";
-
-            router.push(`?${params.toString()}`);
-          }}
-        >
-          {period.label}
-        </span>
-      ))}
-    </Card>
+    <div className="relative">
+      <div
+        className="hover:bg-slate-300 transition-all duration-150 cursor-pointer rounded-md w-9 h-9 flex items-center justify-center"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <ListFilter className="w-7 h-7" />
+      </div>
+      {isOpen && (
+        <Card className="absolute w-40 top-14 -right-16 py-2 rounded-sm">
+          {sorts.map((el) => (
+            <div
+              key={el.label}
+              className="cursor-pointer text-[15px] font-medium p-2 flex hover:bg-slate-200 rounded-md"
+              onClick={() => handleSortSelection(el.label)}
+            >
+              Sort by {el.label}
+            </div>
+          ))}
+        </Card>
+      )}
+    </div>
   );
 }

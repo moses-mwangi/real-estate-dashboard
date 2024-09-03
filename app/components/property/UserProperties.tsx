@@ -5,18 +5,16 @@ import useSearchProperty from "./useProperty";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Separator } from "@/components/ui/separator";
-import UserPropertyOperation from "./UserPropertyOperation";
+import UserPropertyOperation from "./DeleteUpdateProperty";
 import useUser from "@/app/components/user/useUser";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 
 export default function CurrentUserProperties() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
-  const { properties } = useSearchProperty();
-  const { curUser } = useUser();
+  const { properties, userProperties } = useSearchProperty();
 
-  const userProperties = properties.filter(
-    (el) => el.userId[0]._id === curUser?._id
-  );
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchAgents() {
@@ -40,10 +38,27 @@ export default function CurrentUserProperties() {
     );
   };
 
+  let sortedProperty = userProperties;
+  const sort = searchParams.get("SortBy");
+
+  if (sort === "createdAt")
+    sortedProperty = userProperties.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
+  if (sort === "price")
+    sortedProperty = userProperties.sort((a, b) => a.price - b.price);
+
+  if (sort === "type")
+    sortedProperty = userProperties.sort((a, b) =>
+      a.type.localeCompare(b.type)
+    );
+
   return (
     <div className="flex flex-col gap-6">
       <Separator className=" bg-slate-200 h-[2px]" />
-      {userProperties?.map((el, index) => (
+      {sortedProperty?.map((el, index) => (
         <div key={el._id}>
           <div
             className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"

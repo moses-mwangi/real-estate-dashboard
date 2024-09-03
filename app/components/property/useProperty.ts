@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import useUser from "../user/useUser";
 
 interface Property {
   _id: string;
@@ -26,6 +27,7 @@ interface Property {
 function useSearchProperty() {
   const [properties, setProperties] = useState<Property[]>([]);
   const router = useRouter();
+  const { curUser } = useUser();
 
   useEffect(() => {
     async function fetchAgents() {
@@ -72,7 +74,11 @@ function useSearchProperty() {
     }
   };
 
-  return { properties, onSubmit };
+  const userProperties = properties.filter(
+    (el) => el.userId[0]._id === curUser?._id
+  );
+
+  return { properties, userProperties, onSubmit };
 }
 
 export default useSearchProperty;
