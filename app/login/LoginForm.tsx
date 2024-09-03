@@ -68,13 +68,14 @@ export default function LoginForm() {
 
       toast.success("Login successful");
       const token = res.data.token;
+
       reset();
+      router.push("/dashboard");
 
       document.cookie = `token=${token}; path=/`;
 
       setLoading(false);
       router.refresh();
-      router.push("/dashboard");
     } catch (err) {
       toast.error("Failed to login. Please try again.");
       console.log("Error", err);
