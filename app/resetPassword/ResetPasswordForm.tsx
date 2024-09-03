@@ -45,7 +45,8 @@ export default function ResetPasswordForm() {
 
     try {
       setLoading(true);
-      const url = `http://127.0.0.1:3008/api/auth/resetPassword/${token}`;
+
+      const url = `https://real-estate-api-azure.vercel.app/api/auth/resetPassword/${token}`;
       const res = await axios.patch(url, data);
 
       toast.success("Password reset successful");

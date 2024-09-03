@@ -238,7 +238,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -262,6 +262,8 @@ type FormData = {
 
 export default function UpdatePropertyForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const { properties } = useSearchProperty();
   const { id } = useParams();
 
@@ -299,10 +301,17 @@ export default function UpdatePropertyForm() {
   const handleUpdate: SubmitHandler<FormData> = async (data) => {
     try {
       setIsLoading(true);
-      await axios.patch(`http://127.0.0.1:3008/api/property/${id}`, data);
+
+      await axios.patch(
+        `https://real-estate-api-azure.vercel.app/api/property/${id}`,
+        data
+      );
 
       toast.success("You have succefully updated");
       setIsLoading(false);
+      reset();
+
+      router.push("/dashboard");
     } catch (err) {
       toast.error("Property update failed");
       console.log("ERROR:", err);

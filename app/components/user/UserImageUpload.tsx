@@ -7,7 +7,7 @@ import { IoMdCloudUpload } from "react-icons/io";
 import Image from "next/image";
 import useUser from "./useUser";
 import { Button } from "@/components/ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { X } from "lucide-react";
@@ -27,7 +27,7 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
   const [image, setImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  const { register, handleSubmit } = useForm<FormData>();
+  const { handleSubmit } = useForm<FormData>();
 
   const handleImageUpload: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -42,13 +42,15 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
     if (!file) return toast.error("Please select an image to upload.");
 
     const formData = new FormData();
+
     formData.append("image", file);
 
     try {
       const token = document.cookie.split("=")[1];
+
       setLoading(true);
-      const res = await axios.post(
-        "http://127.0.0.1:3008/api/users/updateImage",
+      await axios.post(
+        "https://real-estate-api-azure.vercel.app/api/users/updateImage",
         formData,
         {
           headers: {
@@ -59,7 +61,7 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
       );
 
       toast.success("Image successfully uploaded");
-      setIsUpload(false); // Close modal after successful upload
+      setIsUpload(false);
     } catch (error) {
       console.error("Error uploading image:", error);
       toast.error("Error uploading image");
@@ -94,11 +96,11 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
               <div className="text-xl font-medium">{curUser?.name}</div>
             </div>
             <div className="w-[70px] h-[70px]">
-              {image ? (
+              {curUser?.photo ? (
                 <Image
                   className="h-full w-auto object-cover rounded-full"
-                  src={image}
-                  alt="Cropped Image"
+                  src={curUser.photo}
+                  alt="mage"
                   width={50}
                   height={50}
                 />

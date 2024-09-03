@@ -11,7 +11,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type UpdateMeFormData = {
-  // role: string;
+  phone: string;
   name: string;
 };
 
@@ -77,6 +77,15 @@ export default function UpdateCurrentUser({ handleModalClose }: CloseModal) {
               defaultValue={curUser?.name}
               type="text"
               {...register("name", { required: true })}
+            />
+          </div>
+
+          <div className="flex flex-col gap-[4px]">
+            <Label htmlFor="Phone">Phone Number</Label>
+            <Input
+              defaultValue={curUser?.phone}
+              type="number"
+              {...register("phone")}
             />
           </div>
 

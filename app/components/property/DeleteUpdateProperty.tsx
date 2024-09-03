@@ -25,24 +25,14 @@ export default function UserPropertyOperation({ id }: Id) {
   return (
     <div className="relative">
       <button
-        className="bg-inherit border-none max-w-none"
+        className="bg-inherit hover:bg-gray-300 transition-all duration-150 rounded-sm w-8 h-8 flex items-center justify-center border-none max-w-none"
         onClick={toggleMenu}
       >
         <LuMoreVertical className="w-7 h-7 p-1" />
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-[6px] w-40 bg-white border border-gray-300 rounded shadow-lg">
+        <div className="absolute right-0 mt-[6px] w-40 bg-white border border-gray-300 rounded-md shadow-lg">
           <div className="p-2">
-            {/* <div
-              className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => {
-                router.push(`/dashboard/${id}`);
-                closeMenu();
-              }}
-            >
-              <EyeIcon className="w-[21px] h-[21px] mr-2 text-gray-500" />
-              <span className="font-medium text-gray-700">View</span>
-            </div> */}
             <div className="flex items-center p-2 hover:bg-gray-100 cursor-pointer">
               <DeleteProperty id={id} setIsOpen={setIsOpen} />
             </div>

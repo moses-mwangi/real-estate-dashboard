@@ -43,7 +43,9 @@ export default function ForgotPasswordForm() {
 
     try {
       setLoading(true);
-      const url = "http://127.0.0.1:3008/api/auth/forgotPassword";
+
+      const url =
+        "https://real-estate-api-azure.vercel.app/api/auth/forgotPassword";
       const res = await axios.post(url, data);
 
       toast.success("Emal sent successful");

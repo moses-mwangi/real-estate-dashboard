@@ -103,14 +103,14 @@ export default function SortProperty() {
         <ListFilter className="w-7 h-7" />
       </div>
       {isOpen && (
-        <Card className="absolute w-40 top-14 -right-16 py-2 rounded-sm">
+        <Card className="absolute w-40 top-14 -right-16 py-2 px-2 shadow-lg rounded-md">
           {sorts.map((el) => (
             <div
               key={el.label}
-              className="cursor-pointer text-[15px] font-medium p-2 flex hover:bg-slate-200 rounded-md"
+              className="cursor-pointer text-[14px] text-gray-700 font-medium p-2 flex hover:bg-slate-200 rounded-md"
               onClick={() => handleSortSelection(el.label)}
             >
-              Sort by {el.label}
+              SortBy {el.label}
             </div>
           ))}
         </Card>

@@ -89,15 +89,13 @@ export default function AddPropertyPage() {
     formData.append("size", data.size.toString());
     formData.append("userId", data.userId);
 
-    console.log(formData.get("position"));
-
     try {
       const token = document.cookie.split("=")[1];
 
       if (!token) return;
 
       const res = await axios.post(
-        "http://127.0.0.1:3008/api/property",
+        "https://real-estate-api-azure.vercel.app/api/property",
         formData,
         {
           headers: {
