@@ -31,7 +31,9 @@ function useSearchProperty() {
 
   useEffect(() => {
     async function fetchAgents() {
-      const propety = await axios.get("http://127.0.0.1:3008/api/property");
+      const propety = await axios.get(
+        "https://real-estate-api-azure.vercel.app/api/property"
+      );
       setProperties(propety.data.data);
     }
 
