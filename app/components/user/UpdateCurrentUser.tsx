@@ -38,7 +38,7 @@ export default function UpdateCurrentUser({ handleModalClose }: CloseModal) {
         return;
       }
 
-      const url = `http://127.0.0.1:3008/api/users/updateMe`;
+      const url = `https://real-estate-api-azure.vercel.app/api/users/updateMe`;
       const res = await axios.patch(url, data, {
         headers: {
           Authorization: `Bearer ${token}`,

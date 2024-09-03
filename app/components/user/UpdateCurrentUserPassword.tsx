@@ -43,8 +43,8 @@ export default function UpdateCurrentUserPassword({
         return;
       }
 
-      const url = `http://127.0.0.1:3008/api/auth/updatePassword`;
-      const res = await axios.patch(url, data, {
+      const url = `https://real-estate-api-azure.vercel.app/api/auth/updatePassword`;
+      await axios.patch(url, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
