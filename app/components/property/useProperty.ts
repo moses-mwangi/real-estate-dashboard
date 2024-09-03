@@ -15,8 +15,9 @@ interface Property {
   garages: number;
   createdAt: Date;
   price: number;
+  size: number;
   city: string;
-  zipcode: number;
+  zip: number;
   address: string;
   position: number[];
   userId: [{ _id: string; name: string; email: string }];

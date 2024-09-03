@@ -68,6 +68,7 @@ export default function LoginForm() {
 
       toast.success("Login successful");
       const token = res.data.token;
+      reset();
 
       document.cookie = `token=${token}; path=/`;
 

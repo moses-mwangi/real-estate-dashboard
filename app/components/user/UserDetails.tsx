@@ -31,7 +31,7 @@ export default function UserDetails() {
       </div>
 
       {isOpen && (
-        <div className="absolute right-8 mt-1 w-[260px] p-4 bg-white shadow-lg rounded-lg z-10">
+        <div className="absolute right-8 mt-1 p-4 bg-white shadow-lg rounded-lg z-10">
           <div className="">
             <div className="flex items-center space-x-4 relative">
               <div

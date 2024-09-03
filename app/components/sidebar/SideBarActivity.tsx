@@ -30,11 +30,6 @@ const links = [
     icon: <LucideUsers2 className="w-[22px] h-[22px]" />,
     ref: "/addAgent",
   },
-  // {
-  //   label: "Setting",
-  //   icon: <Settings className="w-[22px] h-[22px]" />,
-  //   ref: "/setting",
-  // },
 ];
 
 export default function SideBarActivity() {

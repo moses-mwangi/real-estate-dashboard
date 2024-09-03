@@ -1,6 +1,7 @@
 import React from "react";
 import DashBoardSideBar from "../../../components/sidebar/DashBoardSideBar";
 import DashBoardNavbar from "../../../components/navbar/Navbar";
+import UpdatePropertyForm from "./UpdatePropertyForm";
 
 export default function UpdateProperty() {
   return (
@@ -9,8 +10,7 @@ export default function UpdateProperty() {
         <DashBoardSideBar />
         <div className="">
           <DashBoardNavbar />
-          {/* <AddPropertyPage /> */}
-          UPDATING
+          <UpdatePropertyForm />
         </div>
       </div>
     </div>
