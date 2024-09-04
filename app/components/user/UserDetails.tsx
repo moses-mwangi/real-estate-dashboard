@@ -10,8 +10,8 @@ import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
 import UserProfileSetting from "./UserProfileSetting";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+// import UserImageUpload from "./UserImageUpload copy";
 import UserImageUpload from "./UserImageUpload";
-// import UserImageUpload from "./UserImageUpload";
 
 export default function UserDetails() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +22,10 @@ export default function UserDetails() {
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleModal = () => {
+    setIsUpload(!isUpload);
   };
 
   return (
@@ -36,24 +40,23 @@ export default function UserDetails() {
             <div className="flex items-center space-x-4 relative">
               <div
                 className="flex-shrink-0 cursor-pointer relative"
-                onClick={() => {
-                  setIsUpload(true);
-                }}
+                onClick={() => setIsUpload(true)}
               >
-                {isUpload === true && (
+                {isUpload && (
                   <UserImageUpload
-                    isUpload={isUpload}
+                    toggleDropdown={toggleDropdown}
+                    toggleModal={toggleModal}
                     setIsUpload={setIsUpload}
                   />
                 )}
                 {curUser?.photo ? (
                   <div className="w-[53px] h-[53px]">
                     <Image
-                      className="rounded-full h-full w-auto object-cover"
+                      className="rounded-full h-full w-full object-cover"
                       src={curUser?.photo}
                       alt="User Avatar"
-                      width={100}
-                      height={100}
+                      width={200}
+                      height={200}
                     />
                   </div>
                 ) : (

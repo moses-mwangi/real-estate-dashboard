@@ -58,13 +58,14 @@ export default function CurrentUserProperties() {
       {sortedProperty?.map((el, index) => (
         <div key={el._id}>
           <div
+            // className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
             className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
             key={el._id}
           >
-            <div className="overflow-hidden relative rounded-l-md cursor-zoom-out">
+            <div className="overflow-hidden w-full h-full relative rounded-l-md cursor-zoom-out">
               {el.image[0] && (
                 <Image
-                  className=" w-full h-auto hover:scale-105 transition-all duration-200"
+                  className=" w-full h-full hover:scale-105 transition-all duration-200"
                   src={
                     el._id
                       ? el.image[nextImageIndexes[index]] || el.image[0]

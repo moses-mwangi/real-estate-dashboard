@@ -16,12 +16,14 @@ type FormData = {
   images: FileList;
 };
 
-interface Props {
+interface Prop {
+  toggleModal: () => void;
+  toggleDropdown: () => void;
+
   setIsUpload: React.Dispatch<React.SetStateAction<boolean>>;
-  isUpload: boolean;
 }
 
-function UserImageUpload({ setIsUpload, isUpload }: Props) {
+function UserImageUpload({ toggleDropdown, toggleModal, setIsUpload }: Prop) {
   const { curUser } = useUser();
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string | null>(null);
@@ -51,7 +53,7 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
       setLoading(true);
       await axios.post(
         "https://real-estate-api-azure.vercel.app/api/users/updateImage",
-        // "http://127.0.0.1:3008/api/users/updateImage",
+
         formData,
         {
           headers: {
@@ -62,7 +64,9 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
       );
 
       toast.success("Image successfully uploaded");
-      setIsUpload(false);
+
+      toggleDropdown();
+      toggleModal();
     } catch (error) {
       console.error("Error uploading image:", error);
       toast.error("Error uploading image");
@@ -83,73 +87,76 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[2px] bg-black bg-opacity-70">
-      <div className="relative w-[400px]  p-6 bg-white rounded-lg shadow-lg">
-        <button
-          className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
-          onClick={() => setIsUpload(false)}
-        >
-          <X className="w-6 h-6" />
-        </button>
-        <Card className="p-4 mt-6 w-full">
-          <div className="flex flex-col gap-2 items-center justify-center mb-8">
-            <div className="flex justify-center flex-col items-center">
-              <div className="text-xl font-medium">{curUser?.name}</div>
+    <>
+      <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[2px] bg-black bg-opacity-70">
+        <div className="relative w-[400px]  p-6 bg-white rounded-lg shadow-lg">
+          <button
+            className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+            // onClick={toggleModal}
+            onClick={() => setIsUpload(false)}
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <Card className="p-4 mt-6 w-full">
+            <div className="flex flex-col gap-2 items-center justify-center mb-8">
+              <div className="flex justify-center flex-col items-center">
+                <div className="text-xl font-medium">{curUser?.name}</div>
+              </div>
+              <div className="w-[70px] h-[70px]">
+                {curUser?.photo ? (
+                  <Image
+                    className="h-full w-full object-cover rounded-full"
+                    src={curUser.photo}
+                    alt="mage"
+                    width={200}
+                    height={200}
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-full flex items-center justify-center font-medium text-[17px] text-slate-100 bg-pink-500">
+                    {curUser?.name[0].toLocaleUpperCase()}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="w-[70px] h-[70px]">
-              {curUser?.photo ? (
-                <Image
-                  className="h-full w-auto object-cover rounded-full"
-                  src={curUser.photo}
-                  alt="mage"
-                  width={50}
-                  height={50}
-                />
+            <div className="bg-gray-100 rounded-md flex justify-center items-center h-48">
+              {!image ? (
+                <label className="cursor-pointer">
+                  <div className="flex flex-col gap-2 justify-center items-center">
+                    <IoMdCloudUpload className="w-14 h-14" />
+                    <p className="text-xl font-medium pb-2">Upload image</p>
+                  </div>
+                  <Input
+                    className="hidden"
+                    type="file"
+                    name="cover"
+                    onChange={handleImageUpload}
+                    accept="image/*"
+                  />
+                </label>
               ) : (
-                <div className="w-full h-full rounded-full flex items-center justify-center font-medium text-[17px] text-slate-100 bg-pink-500">
-                  {curUser?.name[0].toLocaleUpperCase()}
+                <div className="relative w-auto rounded-md h-full">
+                  <Image
+                    width={100}
+                    height={100}
+                    src={image}
+                    alt="logo"
+                    className=" w-full h-full"
+                  />
                 </div>
               )}
             </div>
-          </div>
-          <div className="bg-gray-100 rounded-md flex justify-center items-center h-48">
-            {!image ? (
-              <label className="cursor-pointer">
-                <div className="flex flex-col gap-2 justify-center items-center">
-                  <IoMdCloudUpload className="w-14 h-14" />
-                  <p className="text-xl font-medium pb-2">Upload image</p>
-                </div>
-                <Input
-                  className="hidden"
-                  type="file"
-                  name="cover"
-                  onChange={handleImageUpload}
-                  accept="image/*"
-                />
-              </label>
-            ) : (
-              <div className="relative w-auto rounded-md h-full">
-                <Image
-                  width={100}
-                  height={100}
-                  src={image}
-                  alt="logo"
-                  className=" w-full h-full"
-                />
-              </div>
-            )}
-          </div>
-          <div className="mt-4">
-            <Button
-              className=" w-full bg-blue-600 hover:bg-blue-700"
-              onClick={handleSubmit(handleImageSubmission)}
-            >
-              {loading ? loader : "Upload"}
-            </Button>
-          </div>
-        </Card>
+            <div className="mt-4">
+              <Button
+                className=" w-full bg-blue-600 hover:bg-blue-700"
+                onClick={handleSubmit(handleImageSubmission)}
+              >
+                {loading ? loader : "Upload"}
+              </Button>
+            </div>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

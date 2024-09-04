@@ -14,11 +14,11 @@ export default function UserPhoto() {
       {curUser?.photo ? (
         <div className="w-[50px] h-[50px]">
           <Image
-            className="rounded-full h-full  w-auto object-cover"
+            className="rounded-full h-full  w-full object-cover"
             src={curUser?.photo}
             alt="user photo"
-            width={100}
-            height={100}
+            width={200}
+            height={300}
           />
         </div>
       ) : (

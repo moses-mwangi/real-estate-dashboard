@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import DashBoardSideBar from "../components/sidebar/DashBoardSideBar";
+import DashBoardSideBar from "../components/sidebar/SideBar";
 import DashBoardNavbar from "../components/navbar/Navbar";
 import AddingAgentPage from "./AddingAgentPage";
 
