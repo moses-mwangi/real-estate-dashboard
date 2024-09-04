@@ -10,7 +10,6 @@ import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
 import UserProfileSetting from "./UserProfileSetting";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-// import UserImageUpload from "./UserImageUpload copy";
 import UserImageUpload from "./UserImageUpload";
 
 export default function UserDetails() {

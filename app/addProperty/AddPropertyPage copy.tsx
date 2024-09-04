@@ -94,7 +94,7 @@ export default function AddPropertyPage() {
       if (!token) return;
 
       const res = await axios.post(
-        "http://127.0.0.1:3008/api/property",
+        "https://real-estate-api-azure.vercel.app/api/property",
         formData,
         {
           headers: {

@@ -68,7 +68,10 @@ export default function AddingAgentPage() {
 
       const id = findPostedUser?._id;
 
-      await axios.patch(`http://127.0.0.1:3008/api/users/${id}`, update);
+      await axios.patch(
+        `https://real-estate-api-azure.vercel.app/api/users/${id}`,
+        update
+      );
 
       toast.success("You have succesfully added a new agent");
       setIsLoading(false);
