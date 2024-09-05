@@ -227,9 +227,9 @@ export default function AddPropertyPage() {
             />
 
             <Input
+              type="hidden"
               defaultValue={curUser?._id}
               {...register("userId", { required: true })}
-              type="text"
             />
 
             <Input
