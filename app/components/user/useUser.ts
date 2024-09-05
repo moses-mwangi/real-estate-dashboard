@@ -46,8 +46,7 @@ function useUser() {
   async function getCurrentUser(token: string) {
     try {
       const res = await axios.get(
-        // "https://real-estate-api-azure.vercel.app/api/auth/me",
-        "http://127.0.0.1:3008/api/auth/me",
+        "https://real-estate-api-azure.vercel.app/api/auth/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,
