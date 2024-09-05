@@ -108,13 +108,13 @@ export default function UpdatePropertyForm() {
   );
 
   return (
-    <div className="p-10 bg-slate-100">
-      <p className="text-[27px] mb-4 font-semibold flex justify-center">
+    <div className="p-3 md:p-10 bg-slate-100">
+      <p className="sm:text-[27px] text-[23px] mb-4 font-semibold flex justify-center">
         Updating your property
       </p>
 
       <div className="flex items-center justify-center">
-        <Card className="p-9 w-[75%]">
+        <Card className="p-9 md:w-[75%]">
           <form
             className="w-full mx-auto mt-12"
             onSubmit={handleSubmit(handleUpdate)}

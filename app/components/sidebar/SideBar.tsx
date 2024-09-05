@@ -7,7 +7,7 @@ import SideBarActivity from "./SideBarActivity";
 
 export default function DashBoardSideBar() {
   return (
-    <div className={`border-gray-200 border-r border-solid`}>
+    <div className={`border-gray-200 border-r border-solid md:block hidden`}>
       <Logo />
       <Separator />
       <SideBarActivity />

@@ -14,7 +14,7 @@ export default function DashBoardOperation() {
   return (
     <div className="flex justify-between items-center mb-7">
       <div>
-        <p className="font-medium text-2xl">
+        <p className=" hidden sm:flex font-medium text-2xl">
           Currently you have {userProperties.length} property
         </p>
       </div>

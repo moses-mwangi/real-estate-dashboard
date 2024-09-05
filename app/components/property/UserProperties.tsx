@@ -58,8 +58,7 @@ export default function CurrentUserProperties() {
       {sortedProperty?.map((el, index) => (
         <div key={el._id}>
           <div
-            // className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
-            className="bg-card shadow-lg grid grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
+            className="bg-card shadow-lg grid grid-cols-1 sm:grid-cols-[1fr_3.5fr] items-center gap-2 rounded-md"
             key={el._id}
           >
             <div className="overflow-hidden w-full h-full relative rounded-l-md cursor-zoom-out">
@@ -85,11 +84,9 @@ export default function CurrentUserProperties() {
                 className="w-8 h-8 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 text-slate-100"
               />
             </div>
-            <div
-              className="flex flex-col gap-3 px-4 cursor-pointer"
-              onClick={() => {}}
-            >
-              <div className="flex justify-between gap-3">
+            <div className="flex flex-col gap-3 px-2 sm:px-4 cursor-pointer">
+              {/* <div className="flex justify-between gap-3"> */}
+              <div className="grid grid-cols-1 sm:flex justify-between gap-3">
                 <div className="flex flex-col gap-[2px]">
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
                   <p className="font-semibold text-[15px] hover:text-orange-500 text-black/85">
@@ -102,7 +99,7 @@ export default function CurrentUserProperties() {
                     {el.description.substring(0, 130)}....
                   </p>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className=" sm:flex items-center justify-center">
                   <UserPropertyOperation id={el._id} />
                 </div>
               </div>

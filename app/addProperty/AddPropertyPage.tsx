@@ -127,13 +127,13 @@ export default function AddPropertyPage() {
   );
 
   return (
-    <div className="bg-slate-100 h-[88svh] p-10 overflow-y-scroll">
-      <p className=" flex justify-center font-semibold text-gray-800 mb-11 text-3xl">
+    <div className="bg-slate-100 h-[88svh] p-3 md:p-10 overflow-y-scroll">
+      <p className=" flex justify-center font-semibold text-gray-800 mb-6 mt-4 text-2xl sm:text-3xl">
         Adding new property to your List
       </p>
-      <Card className="mx-auto w-[60svw] px-6 py-8">
+      <Card className="mx-auto md:w-[60svw] px-6 py-6 sm:py-8">
         <form
-          className="w-full mx-auto mt-12"
+          className="w-full mx-auto sm:mt-12"
           onSubmit={handleSubmit(handleUpload)}
         >
           <div className=" grid grid-cols-2 gap-5">

@@ -103,7 +103,7 @@ export default function SortProperty() {
         <ListFilter className="w-7 h-7" />
       </div>
       {isOpen && (
-        <Card className="absolute w-40 top-14 -right-16 py-2 px-2 shadow-lg rounded-md">
+        <Card className="absolute w-40 top-14 -right-16 z-50 py-2 px-2 shadow-lg rounded-md">
           {sorts.map((el) => (
             <div
               key={el.label}

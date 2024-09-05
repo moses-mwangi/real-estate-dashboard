@@ -8,7 +8,7 @@ import log from "../../public/images/image.png";
 export default function LoginPage() {
   return (
     <div className="bg-slate-100/80 h-svh overflow-y-scroll">
-      <div className="w-[40svw] mx-auto pt-8 pb-10">
+      <div className="md:w-[40svw] mx-auto px-4 pt-8 pb-7  md:pb-10">
         <div>
           <div className="flex justify-center mb-8">
             <Image src={log} alt="Logo" priority width={150} height={150} />

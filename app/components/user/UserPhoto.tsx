@@ -10,9 +10,9 @@ export default function UserPhoto() {
   const { curUser } = useUser();
 
   return (
-    <div className="px-12 py-2 w-full flex justify-end">
+    <div className="pr-4 sm:pr-10 py-2 w-full flex justify-end">
       {curUser?.photo ? (
-        <div className="w-[50px] h-[50px]">
+        <div className=" w-[43px] sm:w-[50px] h-[43px] sm:h-[50px]">
           <Image
             className="rounded-full h-full  w-full object-cover"
             src={curUser?.photo}

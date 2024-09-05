@@ -97,12 +97,12 @@ export default function AddingAgentPage() {
   );
 
   return (
-    <div className=" bg-slate-200 h-[90svh]">
-      <p className="text-[27px] text-gray-800/90 font-semibold flex justify-center pt-10">
-        Adding New Agent From the Existing User
+    <div className=" bg-slate-200 h-[90svh] px-3">
+      <p className="sm:text-[27px] text-[22px] text-gray-800/90 font-semibold flex justify-center pt-5">
+        Adding New Agent
       </p>
-      <div className="flex justify-center mt-16">
-        <Card className="p-5 w-[60%]">
+      <div className="flex justify-center mt-5 md:mt-16">
+        <Card className="p-5 w-full md:w-[60%]">
           <form
             className="flex flex-col gap-3"
             onSubmit={handleSubmit(onSubmit)}
