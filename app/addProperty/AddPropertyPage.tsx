@@ -230,7 +230,8 @@ export default function AddPropertyPage() {
 
             <Input
               type="text"
-              defaultValue={curUser?._id}
+              // defaultValue={curUser?._id}
+              value={curUser?._id}
               {...register("userId", { required: true })}
             />
 
