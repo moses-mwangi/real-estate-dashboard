@@ -1,126 +1,98 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { LuTrash2 } from "react-icons/lu";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-interface Id {
+interface DeletePropertyProps {
   id: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isModalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function DeleteProperty({ id, setIsOpen }: Id) {
+export default function DeleteProperty({
+  id,
+  setIsOpen,
+  isModalOpen,
+  setModalOpen,
+}: DeletePropertyProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
     if (!id) {
-      toast.success("You have succesfully deleted property");
-
+      toast.error("No property ID provided.");
       return;
     }
 
     try {
       setIsLoading(true);
-
-      await axios.delete(
+      const res = await axios.delete(
         `https://real-estate-api-azure.vercel.app/api/property/${id}`
       );
 
-      toast.success("You have succesfully deleted property");
+      console.log(res.data);
+
+      toast.success("You have successfully deleted the property.");
       setIsOpen(false);
-      setIsLoading(false);
+      setModalOpen(false);
     } catch (err) {
       console.error("ERROR:", err);
-      toast.error("Failed to delete property");
+      toast.error("Failed to delete property.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const loader = (
+    <div
+      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-white"
+      role="status"
+    >
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+
   return (
     <>
-      <div className=" hidden sm:block">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <div className="flex gap-[2px] items-center">
-              <LuTrash2 className=" w-[21px] h-[21px] mr-2 text-red-600" />
-              <span className=" font-medium text-gray-700">Delete</span>
-            </div>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                property and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction
-                className=" bg-red-600 hover:bg-red-700"
-                onClick={() => handleDelete()}
-              >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
+      <button
+        className="flex gap-2 items-center text-gray-700 font-medium hover:text-red-600"
+        onClick={() => setModalOpen(true)}
+      >
+        <LuTrash2 className="w-5 h-5 text-red-600" />
+        Delete
+      </button>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[2px] bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Are you absolutely sure?
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              This action cannot be undone. This will permanently delete your
+              property and remove your data from our servers.
+            </p>
 
-      <div className="sm:hidden">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <div className="flex gap-[2px] items-center">
-              <LuTrash2 className=" w-[17px] h-[17px] mr-2 text-slate-50" />
-              <span className=" font-medium text-slate-50 text-sm">Delete</span>
-            </div>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                property and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel
-                onClick={() => {
-                  setIsOpen(false);
-                }}
+            <div className="mt-6 flex justify-end space-x-4">
+              <button
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                onClick={() => setModalOpen(false)}
+                disabled={isLoading}
               >
                 Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction
-                className=" bg-red-600 hover:bg-red-700"
-                onClick={() => {
-                  handleDelete();
-                  setIsOpen(false);
-                }}
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center"
+                onClick={handleDelete}
+                disabled={isLoading}
               >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
+                {isLoading ? loader : "Continue"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

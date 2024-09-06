@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { EyeIcon, PenBox } from "lucide-react";
+import { PenBox } from "lucide-react";
 import { LuMoreVertical } from "react-icons/lu";
 import DeleteProperty from "./DeleteProperty";
-import { Button } from "@/components/ui/button";
 
 interface Id {
   id: string;
@@ -13,6 +12,7 @@ interface Id {
 
 export default function UserPropertyOperation({ id }: Id) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
   const toggleMenu = () => {
@@ -36,7 +36,12 @@ export default function UserPropertyOperation({ id }: Id) {
           <div className="absolute right-0 mt-[6px] w-40 bg-white border border-gray-300 rounded-md shadow-lg">
             <div className="p-2">
               <div className="flex items-center p-2 hover:bg-gray-100 cursor-pointer">
-                <DeleteProperty id={id} setIsOpen={setIsOpen} />
+                <DeleteProperty
+                  id={id}
+                  setIsOpen={setIsOpen}
+                  isModalOpen={isModalOpen}
+                  setModalOpen={setModalOpen}
+                />
               </div>
               <div
                 className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
@@ -57,7 +62,12 @@ export default function UserPropertyOperation({ id }: Id) {
         <div className="">
           <div className="px-2 mb-2 flex justify-between">
             <div className="flex items-center bg-orange-500 px-2 py-1 rounded-sm text-slate-50 cursor-pointer">
-              <DeleteProperty id={id} setIsOpen={setIsOpen} />
+              <DeleteProperty
+                id={id}
+                setIsOpen={setIsOpen}
+                isModalOpen={isModalOpen}
+                setModalOpen={setModalOpen}
+              />
             </div>
             <div
               className="flex items-center gap-1 bg-orange-500 px-2 py-1 rounded-sm cursor-pointer"
