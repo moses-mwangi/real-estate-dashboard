@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-
+import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,6 +13,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { LuTrash2 } from "react-icons/lu";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 interface Id {
   id: string;
@@ -21,8 +22,22 @@ interface Id {
 }
 
 export default function DeleteProperty({ id, setIsOpen }: Id) {
-  const handleDelete = () => {
-    console.log("Deleting property with id:", id);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      setIsLoading(true);
+
+      await axios.delete(
+        `https://real-estate-api-azure.vercel.app/api/property/${id}`
+      );
+
+      setIsOpen(false);
+      setIsLoading(false);
+    } catch (err) {
+      console.error("ERROR:", err);
+      toast.error("Failed to delete property");
+    }
   };
 
   return (
@@ -53,10 +68,7 @@ export default function DeleteProperty({ id, setIsOpen }: Id) {
               </AlertDialogCancel>
               <AlertDialogAction
                 className=" bg-red-600 hover:bg-red-700"
-                onClick={() => {
-                  handleDelete();
-                  setIsOpen(false);
-                }}
+                onClick={() => handleDelete()}
               >
                 Continue
               </AlertDialogAction>

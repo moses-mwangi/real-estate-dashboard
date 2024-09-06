@@ -59,8 +59,6 @@ export default function AddPropertyPage() {
     setLoading(true);
     const formData = new FormData();
 
-    console.log(data);
-
     if (data.images.length < 5) {
       toast.error("Please select at least 5 images.");
       setLoading(false);
