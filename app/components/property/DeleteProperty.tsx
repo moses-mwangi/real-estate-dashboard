@@ -25,6 +25,12 @@ export default function DeleteProperty({ id, setIsOpen }: Id) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
+    if (!id) {
+      toast.success("You have succesfully deleted property");
+
+      return;
+    }
+
     try {
       setIsLoading(true);
 
@@ -33,7 +39,6 @@ export default function DeleteProperty({ id, setIsOpen }: Id) {
       );
 
       toast.success("You have succesfully deleted property");
-
       setIsOpen(false);
       setIsLoading(false);
     } catch (err) {
