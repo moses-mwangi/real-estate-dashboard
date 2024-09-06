@@ -32,6 +32,8 @@ export default function DeleteProperty({ id, setIsOpen }: Id) {
         `https://real-estate-api-azure.vercel.app/api/property/${id}`
       );
 
+      toast.success("You have succesfully deleted property");
+
       setIsOpen(false);
       setIsLoading(false);
     } catch (err) {
