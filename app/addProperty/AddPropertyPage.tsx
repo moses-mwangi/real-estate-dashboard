@@ -93,6 +93,10 @@ export default function AddPropertyPage() {
       const token = document.cookie.split("=")[1];
 
       if (!token) return;
+      if (!data.userId) {
+        toast.error("UserId must be available");
+        return;
+      }
 
       const res = await axios.post(
         "https://real-estate-api-azure.vercel.app/api/property",
