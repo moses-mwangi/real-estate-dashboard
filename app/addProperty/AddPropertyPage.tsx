@@ -23,7 +23,7 @@ import { useRouter } from "next/navigation";
 type FormData = {
   images: FileList;
   description: string;
-  about: string;
+  // about: string;
   type: string;
   bathrooms: number;
   bedrooms: number;
@@ -56,7 +56,6 @@ export default function AddPropertyPage() {
   };
 
   const handleUpload = async (data: FormData) => {
-    setLoading(true);
     const formData = new FormData();
 
     if (data.images.length < 5) {
@@ -97,6 +96,7 @@ export default function AddPropertyPage() {
         toast.error("UserId must be available");
         return;
       }
+      setLoading(true);
 
       const res = await axios.post(
         "https://real-estate-api-azure.vercel.app/api/property",
@@ -107,6 +107,9 @@ export default function AddPropertyPage() {
           },
         }
       );
+
+      setLoading(false);
+
       reset();
       toast.success("Property successfully added");
       router.push("/dashboard");
@@ -114,9 +117,12 @@ export default function AddPropertyPage() {
     } catch (error) {
       console.error("Error uploading property:", error);
       toast.error("Error uploading property");
-    } finally {
+
       setLoading(false);
     }
+    // finally {
+    //   setLoading(false);
+    // }
   };
 
   const loader = (
@@ -141,12 +147,12 @@ export default function AddPropertyPage() {
           onSubmit={handleSubmit(handleUpload)}
         >
           <div className=" grid grid-cols-2 gap-5">
-            <Input
+            {/* <Input
               // type="text"
               type="hidden"
               {...register("about", { required: true })}
               placeholder="Add small description about property"
-            />
+            /> */}
 
             <div>
               <Select

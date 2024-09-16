@@ -85,12 +85,12 @@ export default function CurrentUserProperties() {
               />
             </div>
             <div className="flex flex-col gap-3 px-2 sm:px-4 cursor-pointer">
-              {/* <div className="flex justify-between gap-3"> */}
               <div className="grid grid-cols-1 sm:flex justify-between gap-3">
                 <div className="flex flex-col gap-[2px]">
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
                   <p className="font-semibold text-[15px] hover:text-orange-500 text-black/85">
-                    {el.about}
+                    {/* {el.about} */}
+                    {el.description.substring(0, 28)}...
                   </p>
                   <p className="font-medium text-[15px] text-orange-500">
                     ksh {el.price.toLocaleString()}
