@@ -77,7 +77,7 @@ export default function AddPropertyPage() {
     }
 
     formData.append("description", data.description);
-    formData.append("about", data.about);
+    // formData.append("about", data.about);
     formData.append("type", data.type);
     formData.append("bathrooms", data.bathrooms.toString());
     formData.append("bedrooms", data.bedrooms.toString());
@@ -138,7 +138,8 @@ export default function AddPropertyPage() {
         >
           <div className=" grid grid-cols-2 gap-5">
             <Input
-              type="text"
+              // type="text"
+              type="hidden"
               {...register("about", { required: true })}
               placeholder="Add small description about property"
             />
@@ -228,7 +229,6 @@ export default function AddPropertyPage() {
 
             <Input
               type="text"
-              // defaultValue={curUser?._id}
               value={curUser?._id}
               {...register("userId", { required: true })}
             />
