@@ -11,9 +11,9 @@ import UpdateCurrentUserPassword from "../user/UpdateCurrentUserPassword";
 
 const links = [
   {
-    label: "Website",
+    label: "Bomac website",
     icon: <LuExternalLink className="w-[22px] h-[22px]" />,
-    ref: "https://real-estate-mu-peach.vercel.app/",
+    ref: "https://house.bomac.io/",
   },
   {
     label: "Dashboard",

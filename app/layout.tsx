@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Bomac Real Estate",
+  title: "Bomac Dashboard",
   description: "The best real estate company",
 };
 

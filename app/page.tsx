@@ -27,7 +27,6 @@ export default function Home() {
   const handleUpload = async (data: FormData) => {
     const formData = new FormData();
 
-    // Append each selected file to FormData
     data.images.forEach((file, index) => {
       formData.append(`images`, file);
     });
@@ -45,7 +44,7 @@ export default function Home() {
           },
         }
       );
-      setImageUrls(res.data.urls); // Assuming the API returns an array of URLs
+      setImageUrls(res.data.urls);
       toast.success("Images successfully uploaded");
     } catch (error) {
       console.error("Error uploading images:", error);
