@@ -45,6 +45,7 @@ export default function LoginForm() {
 
   const handleLogin: SubmitHandler<Login> = async (data) => {
     const validateUser = allUsers?.find((el) => el.email === data.email);
+    console.log(data, allUsers);
 
     if (!validateUser) {
       toast.error("Invalid email and password");

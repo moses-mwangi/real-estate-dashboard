@@ -32,7 +32,6 @@ function useUser() {
     async function getAllUsers() {
       try {
         const res = await axios.get(
-          // "http://127.0.0.1:3008/api/users"
           "https://real-estate-api-azure.vercel.app/api/users"
         );
 
@@ -47,7 +46,6 @@ function useUser() {
   async function getCurrentUser(token: string) {
     try {
       const res = await axios.get(
-        // "http://127.0.0.1:3008/api/auth/me",
         "https://real-estate-api-azure.vercel.app/api/auth/me",
         {
           headers: {
