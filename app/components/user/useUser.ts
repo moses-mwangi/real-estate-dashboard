@@ -27,11 +27,12 @@ function useUser() {
       setCurUser(null);
     }
   }, []);
-
+  //http://127.0.0.1:3008/api
   useEffect(() => {
     async function getAllUsers() {
       try {
         const res = await axios.get(
+          // "https://real-estate-api-azure.vercel.app/api/users"
           "https://real-estate-api-azure.vercel.app/api/users"
         );
 
