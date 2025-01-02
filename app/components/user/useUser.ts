@@ -32,8 +32,8 @@ function useUser() {
     async function getAllUsers() {
       try {
         const res = await axios.get(
-          // "https://real-estate-api-azure.vercel.app/api/users"
-          "http://127.0.0.1:3008/api/users"
+          "https://real-estate-api-azure.vercel.app/api/users"
+          // "http://127.0.0.1:3008/api/users"
         );
 
         setAllUsers(res.data.users);
