@@ -78,7 +78,7 @@ function useSearchProperty() {
 
   const userProperties = properties.filter((el) =>
     // el.userId[0]._id === curUser?._id ? el.userId[0]._id === curUser?._id : []
-    el.userId[0] && curUser?._id ? el.userId[0]._id === curUser?._id : []
+    el.userId[0]._id === curUser?._id ? el.userId[0]._id === curUser?._id : []
   );
 
   return { properties, userProperties, onSubmit };
